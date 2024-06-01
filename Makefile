@@ -92,6 +92,7 @@ console_client:
 .PHONY: console_build
 console_build: console_dependencies console_client
 	cd console && \
+	yarn install
 	yarn build
 
 .PHONY: clean
