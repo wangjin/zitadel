@@ -65,6 +65,7 @@ type Handler struct {
 type externalIDPCallbackData struct {
 	State            string `schema:"state"`
 	Code             string `schema:"code"`
+	AuthCode         string `schema:"authCode"`
 	Error            string `schema:"error"`
 	ErrorDescription string `schema:"error_description"`
 
@@ -345,6 +346,10 @@ func (h *Handler) parseCallbackRequest(r *http.Request) (*externalIDPCallbackDat
 	}
 	if data.State == "" {
 		return nil, zerrors.ThrowInvalidArgument(nil, "IDP-Hk38e", "Errors.Intent.StateMissing")
+	}
+
+	if data.Code == "" {
+		data.Code = data.AuthCode
 	}
 	return data, nil
 }
