@@ -16,6 +16,7 @@ jobs:
     - uses: actions/checkout@v4
     - uses: actions/setup-go@v5.0.1
     - uses: actions/setup-node@v4.0.2
-    - uses: gha-utilities/sass-build@v0.6.0
+    - name: Install node-sass
+      run: npm install -g node-sass
     - name: Build the Docker image
       run: make docker_image
