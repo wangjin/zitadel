@@ -194,6 +194,7 @@ func (l *Login) handleIDP(w http.ResponseWriter, r *http.Request, authReq *domai
 	}
 
 	content, redirect := session.GetAuth(r.Context())
+	logging.WithFields("redirect", redirect, "content", content).Info("Debug->GetAuth Result")
 	if redirect {
 		http.Redirect(w, r, content, http.StatusFound)
 		return

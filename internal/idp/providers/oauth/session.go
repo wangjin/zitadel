@@ -36,12 +36,12 @@ func (s *Session) GetAuth(ctx context.Context) (string, bool) {
 // It will execute an OAuth 2.0 code exchange if needed to retrieve the access token,
 // call the specified userEndpoint and map the received information into an [idp.User].
 func (s *Session) FetchUser(ctx context.Context) (user idp.User, err error) {
+	logging.WithFields("User", user, "UserEndpoint", s.Provider.userEndpoint, "Tokens", s.Tokens).Info("Debug->FetchUser")
 	if s.Tokens == nil {
 		if err = s.authorize(ctx); err != nil {
 			return nil, err
 		}
 	}
-	logging.WithFields("User", user, "UserEndpoint", s.Provider.userEndpoint).Info("Debug->FetchUser")
 	req, err := http.NewRequest("GET", s.Provider.userEndpoint, nil)
 	if err != nil {
 		return nil, err
