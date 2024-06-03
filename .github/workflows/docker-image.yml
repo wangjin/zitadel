@@ -17,7 +17,7 @@ jobs:
     - uses: actions/setup-go@v5.0.1
     - uses: actions/setup-node@v4.0.2
     - name: Install node-sass
-      run: npm install -g sass-loader node-sass
+      run: npm install -g sass
     - name: Check sass version
       run: sass --version
     - name: Build the Docker image
