@@ -3,6 +3,7 @@ package oauth
 import (
 	"context"
 	"errors"
+	"github.com/zitadel/logging"
 	"net/http"
 
 	"github.com/zitadel/oidc/v3/pkg/client/rp"
@@ -27,6 +28,7 @@ type Session struct {
 
 // GetAuth implements the [idp.Session] interface.
 func (s *Session) GetAuth(ctx context.Context) (string, bool) {
+	logging.WithFields("AuthUrl", s.AuthURL).Info("Debug->GetAuth")
 	return idp.Redirect(s.AuthURL)
 }
 
@@ -39,6 +41,7 @@ func (s *Session) FetchUser(ctx context.Context) (user idp.User, err error) {
 			return nil, err
 		}
 	}
+	logging.WithFields("User", user, "UserEndpoint", s.Provider.userEndpoint).Info("Debug->FetchUser")
 	req, err := http.NewRequest("GET", s.Provider.userEndpoint, nil)
 	if err != nil {
 		return nil, err
