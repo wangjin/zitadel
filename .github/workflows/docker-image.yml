@@ -16,9 +16,19 @@ jobs:
     - uses: actions/checkout@v4
     - uses: actions/setup-go@v5.0.1
     - uses: actions/setup-node@v4.0.2
-    - name: Install node-sass
+    - name: Docker Login
+      env:
+        DOCKER_USER: ${{secrets.DOCKER_USERNAME}}
+        DOCKER_PASSWORD: ${{scerets.DOCKER_PASSWORD}}
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - name: Install dart-sass
       run: npm install -g sass
     - name: Check sass version
       run: sass --version
     - name: Build the Docker image
       run: make docker_image
+    - name: Rename Docker image
+      run: docker tag zitadel:local wangjin252/zitadel:local
+    - name: Push Docker image
+      run: docker push wangjin252/zitadel:local
