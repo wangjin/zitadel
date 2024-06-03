@@ -348,9 +348,12 @@ func (h *Handler) parseCallbackRequest(r *http.Request) (*externalIDPCallbackDat
 		return nil, zerrors.ThrowInvalidArgument(nil, "IDP-Hk38e", "Errors.Intent.StateMissing")
 	}
 
+	logging.WithFields("Debug-Code", data.Code)
+	logging.WithFields("Debug-AuthCode", data.AuthCode)
 	if data.Code == "" {
 		data.Code = data.AuthCode
 	}
+	logging.WithFields("Debug-Code1", data.Code)
 	return data, nil
 }
 
