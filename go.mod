@@ -43,6 +43,7 @@ require (
 	github.com/lucasb-eyer/go-colorful v1.2.0
 	github.com/minio/minio-go/v7 v7.0.69
 	github.com/mitchellh/mapstructure v1.5.0
+	github.com/mozillazg/go-pinyin v0.20.0
 	github.com/muesli/gamut v0.3.1
 	github.com/muhlemmer/gu v0.3.1
 	github.com/muhlemmer/httpforwarded v0.1.0
